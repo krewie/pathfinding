@@ -1,10 +1,11 @@
 var _ = require('lodash');
+var heap = require('./minheap').BinaryHeap;
 
 Astar({
     x: 0,
     y: 0
 }, {
-    x: 5,
+    x: 50,
     y: 5
 }, [{
     x: -1,
@@ -76,6 +77,10 @@ function Astar(start, goal, obstacles) {
     function fScoreSet(id, val) {
         fScore[JSON.stringify(id)] = val;
     }
+
+    var test = new heap(fScoreGet);
+    test.push(start);
+
 
     //The cost of going from start to start is zero.
 
@@ -183,7 +188,6 @@ function Astar(start, goal, obstacles) {
                     return o.x == neighbor.x && o.y == neighbor.y;
                 }) == 0) {
                 //Discover a new node
-                console.log("pushing: ", neighbor);
                 openSet.push(neighbor);
             }
 
@@ -212,7 +216,4 @@ function Astar(start, goal, obstacles) {
         }
         console.log(total_path);
     }
-
-
-
 }
